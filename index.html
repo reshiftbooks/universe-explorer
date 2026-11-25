@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Universe Explorer — Interactive 3D Space Visualization</title>
+  <meta name="description" content="An interactive 3D universe explorer: solar system, Earth, black hole, galaxy and space missions. Built with Three.js, runs entirely in the browser." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='%236cc7ff'/%3E%3Cellipse cx='16' cy='16' rx='15' ry='5' fill='none' stroke='%23f7b733' stroke-width='1.5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="scene" aria-label="3D universe viewport"></canvas>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div class="brand-text">
+          <strong>UNIVERSE EXPLORER</strong>
+          <span>Interactive 3D Space Visualization</span>
+        </div>
+      </div>
+      <nav class="module-nav" id="module-nav" aria-label="Modules">
+        <button class="nav-btn active" data-module="solar">Solar System</button>
+        <button class="nav-btn" data-module="earth">Earth</button>
+        <button class="nav-btn" data-module="blackhole">Black Hole</button>
+        <button class="nav-btn" data-module="galaxy">Galaxy</button>
+        <button class="nav-btn" data-module="missions">Space Missions</button>
+      </nav>
+    </header>
+
+    <div id="tooltip" class="tooltip" hidden></div>
+
+    <aside id="info-panel" class="info-panel" hidden>
+      <button id="info-close" class="panel-close" aria-label="Close information panel">&times;</button>
+      <div id="info-content"></div>
+    </aside>
+
+    <div id="scale-note" class="scale-note"></div>
+
+    <div class="controls-bar" id="controls-bar">
+      <button id="btn-play" class="ctl-btn" title="Play / pause animation (Space)"><span id="btn-play-label">Pause</span></button>
+      <div class="ctl-speed">
+        <label for="speed-slider">Speed</label>
+        <input id="speed-slider" type="range" min="0.1" max="20" step="0.1" value="1" />
+        <span id="speed-value">1.0&times;</span>
+      </div>
+      <button id="btn-reset" class="ctl-btn" title="Reset camera (R)">Reset View</button>
+      <button id="btn-fullscreen" class="ctl-btn" title="Toggle fullscreen (F)">Fullscreen</button>
+    </div>
+
+    <div id="missions-overlay" class="missions-overlay" hidden>
+      <div class="missions-inner">
+        <div class="missions-head">
+          <h2>SPACE MISSIONS</h2>
+          <p>Landmark missions that expanded our understanding of the universe. Use the top navigation to return to the 3D views.</p>
+        </div>
+        <div id="missions-grid" class="missions-grid"></div>
+      </div>
+    </div>
+
+    <div id="loader" class="loader">
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="loader-title">Initializing universe&hellip;</p>
+      <p class="loader-sub">Loading Three.js from CDN and building procedural worlds</p>
+    </div>
+
+    <div id="error-overlay" class="error-overlay" hidden>
+      <div class="error-box">
+        <h3>Something went wrong</h3>
+        <p id="error-message"></p>
+        <p class="error-hint">Check that JavaScript is enabled and you are online (Three.js loads from a CDN), then reload the page.</p>
+        <button id="error-reload" class="ctl-btn">Reload</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/textures.js"></script>
+  <script src="js/scenes/solar.js"></script>
+  <script src="js/scenes/earth.js"></script>
+  <script src="js/scenes/blackhole.js"></script>
+  <script src="js/scenes/galaxy.js"></script>
+  <script src="js/scenes/missions.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
